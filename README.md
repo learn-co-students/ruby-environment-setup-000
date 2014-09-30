@@ -161,8 +161,14 @@ We spend most of our time in a text editor. Make sure you have a good one. We us
 
 The first task is to make a symlink to subl. This will allow you to type `subl` in your terminal to launch Sublime Text. Assuming you've placed Sublime Text 2 in the Applications folder, and that you have a `/usr/local/bin` directory in your path, you can run:
 
+### Sublime Text 2
 ```
 ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" ~/bin/subl
+```
+
+### Sublime Text 3
+```
+ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ~/bin/subl
 ```
 
 ## Install Package Control
@@ -344,7 +350,15 @@ It's important that you have proper syntax highlighting and a readable light and
 
 ### How to Install a Sublime Theme
 
-Just put it in here: `~/Library/Application\ Support/Sublime\ Text\ 2/Packages/Color\ Scheme\ -\ Default`
+**Sublime Text 2**
+
+Just put it in here:
+`~/Library/Application\ Support/Sublime\ Text\ 2/Packages/Color\ Scheme\ -\ Default`
+
+**Sublime Text 3**
+
+Or if you're using this version:
+`~/Library/Application\ Support/Sublime\ Text\ 3/Packages/Color\ Scheme\ -\ Default/`
 
 ## Supporting Software
 
