@@ -5,7 +5,11 @@ languages: ruby, bash
 
 #Environment Setup
 
-It's important to get your system setup and working well. There are a ton of different ways to customize your system, but to keep things simple, and to make it easy for others to work with you, we're going to set our computers up in a similar way. Go through the instructions in readme and the files in this repo and follow the instructions.
+It's important to get your system setup and working well. There are a ton of different ways to customize your system, but to keep things simple, and to make it easy for others to work with you, we're going to set our computers up in a similar way. Go through the instructions in here and follow the instructions.
+
+# OSX Version
+
+Make sure you are using OSX 10.9 Mavericks. To check, click on the  in the menu bar and select "About This Mac" The version should be 10.9.5 or greater. If your version of OSX is below 10.9.5, update your Mac through the Mac App Store. 
 
 # GCC
 
