@@ -21,13 +21,51 @@ Within that Bash Profile are comments that explain each part. Make sure to read 
 
 Just remember, to activate a change in the dotfile, you must **reload your shell**. You can do that via opening a new tab.
 
+# Directory Setup
+
+In order to have an efficient workflow in programming, it's important to have a directory setup that is conducive to navigating multiple directories quickly. Here's how Avi likes to setup directories for development. Some general rules he follows:
+
+- Except for directories in `~`, always use lowercase directory names.
+- I prefer `-` to `_` or ` ` to separate words in directory names.
+- I want to keep all my code in one place.
+- I want to have a place for resources and other things that are related to code, but aren't code.
+- I want to be able to get in/out of different code projects easily.
+
+So here's what Avi's filesystem looks like, relevant to code only. Please note that the file directory below is specific to Avi's environment. Your username (`avi` in this case) will vary depending on what your username is.
+
+```
+\Users\avi
+  \Users\avi\Development
+    \Users\avi\Development\books # for books and PDFs and Videos
+    \Users\avi\Development\resources # for things like fonts or icons
+    \Users\avi\Development\data # for raw SQL or Data Sources I use
+    \Users\avi\Development\projects # for things that relate to large projects but aren't code
+    \Users\avi\Development\code
+      \Users\avi\Development\code\aviflombaum.github.io # Where that is a code project.
+      \Users\avi\Development\code\flatiron\sql\homework1.sql # for a specific assignment in flatiron sql unit.
+```
+
+Then make use of my `code` function in my `bash_profile` to quickly get into the main code directory where I can easily `cd` into whatever project or `ls | grep` a simple project.
+
+If you want, add the following `lg` function to your bash profile for easy file matching in a current directory.
+
+```
+# A function to easily grep for a matching file
+# USE: lg filename
+function lg {
+  FIRST=`echo $1 | sed -e 's/^\(.\).*/\1/'`
+  REST=`echo $1 | sed -e 's/^.\(.*\)/\1/'`
+  ls -la | grep "[$FIRST]$REST"
+}
+```
+
 # GCC
 
 Most OS level programs are written in C or C++. These programs must be compiled and interpreted by a C-level compiler. The most common compiler for POSIX systems is GCC, or the GNU Compiler Collection. On OS 10.8 and below (anything before Mavericks), GCC is part of the command line tools.  
 
 If you are using using OS 10.9(Mavericks) or above, you need to download the command line tools from Apples [developer webiste](https://developer.apple.com/downloads), or if you don't have an Apple developer account, you can download the command line tools [here](http://flatiron-school.s3.amazonaws.com/software/command_line_tools_os_x_mavericks_for_xcode__late_october_2013.dmg).
 
-If you have OS 10.8 or earlier, you should upgrade. You will also need to download Xcode from the mac App Store and download the command line tools from there. 
+If you have OS 10.8 or earlier, you should upgrade. You will also need to download Xcode from the mac App Store and download the command line tools from there.
 
 Once GCC is installed correctly, you should be able to type `gcc` into terminal and see output like:
 
@@ -120,7 +158,34 @@ Finally ensure that 2.1.2 is the default ruby with `rvm use 2.1.2 --default`
 
 # SublimeText3
 
-We spend most of our time in a text editor. Make sure you have a good one. We use [SublimeText3](http://www.sublimetext.com/3). Once you have that installed, go to the `sublime.md` file in this repository and follow the instructions to get sublime setup properly.
+We spend most of our time in a text editor. Make sure you have a good one. We use [SublimeText3](http://www.sublimetext.com/3). Once you have that installed, follow the instructions below.
+
+
+## Setting up the subl symlink
+
+The first task is to make a symlink to subl. This will allow you to type `subl` in your terminal to launch Sublime Text. Assuming you've placed Sublime Text 2 in the Applications folder, and that you have a `/usr/local/bin` directory in your path, you can run:
+
+```
+ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" ~/bin/subl
+```
+
+## Install Package Control
+
+Go to [this link](https://sublime.wbond.net/installation).
+
+Sublime Text's functionality can be greatly expanded via plugins called "packages." We won't get into any specific ones to install here, but in order to install them later on down the road, we need to install what is known as Package Control.
+
+Open Sublime Text (you should be able to type `subl` from your terminal now), and then either press:
+
+```
+ctrl+`
+```
+
+Or, click `View > Show Console`. This will open the Sublime Text console. Then, visit [this link](https://sublime.wbond.net/installation#st2), and copy and paste the code under the Sublime Text 2 tab into the Sublime Text console. Press `enter` and Package Control will be installed.
+
+## Resources
+- [RVM, RSpec and Sublime Text 2](http://rubenlaguna.com/wp/2012/12/07/sublime-text-2-rvm-rspec-take-2/)
+- [Shortcuts with PDF](http://maxoffsky.com/code-blog/sublime-text-2-shortcuts-printable-format-and-a-gist/)
 
 # Check Up
 
@@ -160,7 +225,7 @@ If you see some `bash - command not found` type output, it's not a big deal, but
 
 ## sqlite3
 
-`sqlite3 --version` should be >= the 3.7.12 series. If not, do `brew install sqlite3 and `brew link sqlite3 --force` and open a new terminal to retest.
+`sqlite3 --version` should be >= the 3.7.12 series. If not, do `brew install sqlite3` and `brew link sqlite3 --force` and open a new terminal to retest.
 
 ## git
 
@@ -264,3 +329,80 @@ This will allow you to see what methods an object you're working with has but ex
 Base is an OS X GUI for browsing SQL databases but is not free.
 SQLitebrowser is a GUI that only works for SQLITE.
 Navicat is a free GUI that works for multiple database types (SQLITE, MYSQL, POSTGRES)
+
+# Other Items of Interest
+
+These items below are **optional**, but are definitely worth looking through. We utilize most of these in our day-to-day workflows.
+
+## Themes
+
+### Solarized
+
+![Solarized](https://github.com/altercation/solarized/raw/master/img/solarized-yinyang.png)
+
+It's important that you have proper syntax highlighting and a readable light and dark theme for Terminal and your text editor. At Flatiron, we <3 [Solarized](http://ethanschoonover.com/solarized). After all, it's a mathematically proven theme. There are other themes, but let's stay consistent and all use Solarized, it's so pretty. You can grab the [Flatiron Solarized](http://flatironschool.s3.amazonaws.com/curriculum/resources/environment/themes/Solarized%20Flatiron.zip).
+
+![Solarized](https://github.com/altercation/solarized/raw/master/img/solarized-palette.png)
+
+![Solarized](https://github.com/altercation/solarized/raw/master/img/solarized-vim.png)
+
+### How to Install a Sublime Theme
+
+Just put it in here: `~/Library/Application\ Support/Sublime\ Text\ 2/Packages/Color\ Scheme\ -\ Default`
+
+## Supporting Software
+
+There are a bunch of tools that we find invaluable as a developer.
+
+### A Launcher
+
+You should have a quick launcher so that you can run applications and arbitrary commands through a keyboard shortcut.
+
+[Alfred 2](http://www.alfredapp.com/) - This is my favorite, but it costs money to unlock the very required power features. But I use this around 92 times a day. Plus it comes with a clipboard history. There are lots of power user guides for all this software.
+
+[Quicksilver](http://qsapp.com/) - tried and true and free and awesome. but so old.
+
+[Launchbar](http://www.obdev.at/products/launchbar/index.html) - People love it, I've never used it, and I think it costs money.
+
+**There are lots of power user guides for all this software.**
+
+### Clipboard History
+
+If you do not have a clipboard history enabled...well, I mean, that's just crazy. The one in Alfred is awesome. Others include:
+
+[Collective](http://www.generation-loss.com/) - Looks awesome, super cheap ($2), have never used it.
+
+[Jumpcut](http://jumpcut.sourceforge.net/) - Free but old.
+
+[ClipMenu](http://www.clipmenu.com/) - Free.
+
+
+### Documentation
+
+[Dash](http://kapeli.com/dash) - A comprehensive documentation browser. It's awesome, will save you hours in googling. Costs money, but worth it.
+
+### Git Visualizers
+
+[Github OS X](http://mac.github.com/) - Worth having, but honestly, I've never used it.
+
+[SourceTree](http://www.sourcetreeapp.com/) - Super heavy git gui that's free and pretty good.
+
+[GitX (L)](http://gitx.laullon.com/) - A well maintained fork of GitX
+
+### Window Management
+
+[Breeze](http://www.autumnapps.com/breeze/) - My favorite.
+
+## Programming Fonts
+
+You're going to be spending a ton of time staring at your screen. The default fonts
+you have installed probably aren't the most readable. Here are some nice ones you
+may want to consider installing:
+
+- [Flatiron Collection of Fonts](http://flatiron-school.s3.amazonaws.com/resources/programming%20fonts.zip)
+- [Dan Benjamin's Top 10 Programming Fonts](http://hivelogic.com/articles/top-10-programming-fonts/)
+- [Dan Benjamin on Anonymous Pro](http://hivelogic.com/articles/anonymous-pro-programming-monospace-font)
+- [Jeff Atwood on Programming Fonts](http://www.codinghorror.com/blog/2007/10/revisiting-programming-fonts.html)
+- [More Fonts!](http://www.openwatcom.org/index.php/Programmers_Fonts)
+- [Even More Fonts!](http://www.proggyfonts.com/)
+- [Managing Fonts in OS X](http://support.apple.com/kb/ht2435)
