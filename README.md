@@ -7,6 +7,28 @@ languages: ruby, bash
 
 It's important to get your system setup and working well. There are a ton of different ways to customize your system, but to keep things simple, and to make it easy for others to work with you, we're going to set our computers up in a similar way. Go through the instructions in readme and the files in this repo and follow the instructions.
 
+# GCC
+
+Most OS level programs are written in C or C++. These programs must be compiled and interpreted by a C-level compiler. The most common compiler for POSIX systems is GCC, or the GNU Compiler Collection. On OS 10.8 and below (anything before Mavericks), GCC is part of the command line tools.  
+
+If you are using using OS 10.9 (Mavericks) or above, you need to download the most recent version of Command Line Tools from Apple's [developer website](https://developer.apple.com/opensource/), or if you don't have an Apple developer account, you can download the command line tools [here](https://s3-us-west-2.amazonaws.com/command-line-tools/command_line_tools_install.dmg).
+
+If you have an OSX version earlier than 10.9, you should upgrade to at least 10.9 (Mavericks). You should be able to go to the App Store on your computer, search for Mavericks, and install it from there.
+
+Once GCC is installed correctly, you should be able to type `gcc` into terminal and see output like:
+
+```
+clang: error: no input files
+```
+
+If you see output like:
+
+```
+-bash: gcc: command not found
+```
+
+Then it means that the command line tools are not set up correctly. Flag one of the TAs down if you're unable to set it up.
+
 # Bash Profile
 
 As you've been learning, your bash_profile is a script that runs every time you open or login to your shell. It can configure environment variables, like your `PS1`, which stores your prompt, or `EDITOR`, which is the command other programs will use when they need to launch your default editor.
@@ -58,32 +80,6 @@ function lg {
   ls -la | grep "[$FIRST]$REST"
 }
 ```
-
-# GCC
-
-Most OS level programs are written in C or C++. These programs must be compiled and interpreted by a C-level compiler. The most common compiler for POSIX systems is GCC, or the GNU Compiler Collection. On OS 10.8 and below (anything before Mavericks), GCC is part of the command line tools.  
-
-If you are using using OS 10.9(Mavericks) or above, you need to download the command line tools from Apples [developer webiste](https://developer.apple.com/downloads), or if you don't have an Apple developer account, you can download the command line tools [here](http://flatiron-school.s3.amazonaws.com/software/command_line_tools_os_x_mavericks_for_xcode__late_october_2013.dmg).
-
-If you have OS 10.8 or earlier, you should upgrade. You will also need to download Xcode from the mac App Store and download the command line tools from there.
-
-Once GCC is installed correctly, you should be able to type `gcc` into terminal and see output like:
-
-```
-clang: error: no input files
-```
-
-If you see output like:
-
-```
--bash: gcc: command not found
-```
-
-The command line tools are not set up correctly.
-
-[Download XCode Command Line Tools from Apple](https://developer.apple.com/downloads/index.action) *search for Command Line Tools*
-
-Mount the downloaded DMG and install. Open a new terminal and try `gcc`.
 
 # Homebrew
 
