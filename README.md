@@ -5,7 +5,7 @@ languages: ruby, bash
 
 #Environment Setup
 
-It's important to get your system setup and working well. There are a ton of different ways to customize your system, but to keep things simple, and to make it easy for others to work with you, we're going to set our computers up in a similar way. Go through the instructions in here and follow the instructions.
+It's important to get your system setup and working well. There are a ton of different ways to customize your system, but to keep things simple, and to make it easy for others to work with you, we're going to set our computers up in a similar way. **Go through these instructions and be sure to read everything!**
 
 # OSX Version
 
@@ -13,7 +13,7 @@ Make sure you are using OSX 10.9 Mavericks. To check, click on the  in the me
 
 # GCC
 
-Most OS level programs are written in C or C++. These programs must be compiled and interpreted by a C-level compiler. The most common compiler for POSIX systems is GCC, or the GNU Compiler Collection. On OS 10.8 and below (anything before Mavericks), GCC is part of the command line tools.  
+Most OS level programs are written in C or C++. These programs must be compiled and interpreted by a C-level compiler. The most common compiler for POSIX systems is GCC, or the GNU Compiler Collection. On OS 10.8 and below (anything before Mavericks), GCC is part of the command line tools.
 
 If you are using using OS 10.9 (Mavericks) or above, you need to download the most recent version of Command Line Tools from Apple's [developer website](https://developer.apple.com/opensource/), or if you don't have an Apple developer account, you can download the command line tools [here](https://s3-us-west-2.amazonaws.com/command-line-tools/command_line_tools_install.dmg).
 
@@ -43,9 +43,9 @@ And finally, you can also build functions to simplify common workflows.
 
 [Flatiron Bash Profile](https://github.com/flatiron-school/dotfiles/blob/master/bash_profile)
 
-Within that Bash Profile are comments that explain each part. Make sure to read them! You can always comment sections in/out to see what they do and how they effect your prompt, shell, and environment. To create this bash_profile locally, simply navigate into your home directory (`cd ~`) and `touch .bash_profile` or if it exists already (`ls -a` and scan the output to see if there is a file .bash_profile - `open .bash_profile`). Copy the raw text from the Flatiron Bash Profile into your bash_profile and save.
+Within that Bash Profile are comments that explain each part. **Make sure to read them!** You can always comment sections in/out to see what they do and how they effect your prompt, shell, and environment. To create this bash_profile locally, simply navigate into your home directory (`cd ~`) and `touch .bash_profile` or if it exists already (`ls -a` and scan the output to see if there is a file .bash_profile - `open .bash_profile`). Copy the raw text from the Flatiron Bash Profile into your bash_profile and save.
 
-Just remember, to activate a change in the dotfile, you must **reload your shell**. You can do that via opening a new tab.
+Just remember, to activate a change in the dotfile, you must **reload your shell**. You can do that via opening a new tab or typing `source .bash_profile` (from the `~` directory).
 
 # Directory Setup
 
@@ -156,23 +156,23 @@ sudo mv /usr/bin/gem /usr/bin/gem.bak
 Another issue is sometimes rvm gets installed in /usr/local/rvm, a system wide install. If so, you have to rvm implode to uninstall rvm, clear out your .bashrc file or remove any reference to RVM in there, `sudo rm /etc/profile.d/rvm.sh`.  You'll also want to remove the reference to that file you just deleted in the `/etc/profile`. Also `sudo rm /etc/rvmrc`. And then restart your computer and reinstall rvm. Make sure it is installing into `/Users/yourusername/.rvm` and not `/usr/local` A system wide install in /usr/local/rvm, never install rvm with sudo (and avoiding the use of sudo in general).
 Finally ensure that 2.1.2 is the default ruby with `rvm use 2.1.2 --default`
 
-# SublimeText3
+# Sublime Text
 
-We spend most of our time in a text editor. Make sure you have a good one. We use [SublimeText3](http://www.sublimetext.com/3). Once you have that installed, follow the instructions below.
+We spend most of our time in a text editor. Make sure you have a good one. We use [Sublime Text](http://www.sublimetext.com). Sublime Text 2 and 3 are basically the same, so it's up to you which one you want. Once you have that installed, follow the instructions below.
 
 
 ## Setting up the subl symlink
 
-The first task is to make a symlink to subl. This will allow you to type `subl` in your terminal to launch Sublime Text. Assuming you've placed Sublime Text 2 in the Applications folder, and that you have a `/usr/local/bin` directory in your path, you can run:
+The first task is to make a symlink to subl. This will allow you to type `subl` in your terminal to launch Sublime Text. Assuming you've placed Sublime Text in the Applications folder, and that you have a `/usr/local/bin` directory in your path, you can run:
 
-### Sublime Text 2
+### For Sublime Text 2
 ```
-ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" ~/bin/subl
+ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" usr/local/bin
 ```
 
-### Sublime Text 3
+### For Sublime Text 3
 ```
-ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ~/bin/subl
+ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" usr/local/bin
 ```
 
 ## Install Package Control
@@ -270,7 +270,12 @@ Notice how all the ruby versions correspond in both number and paths?
 
 ## Case-Insensitive Auto-Completion
 
-[Installing Case Insensitive Tab Autocompletion](http://superuser.com/questions/90196/case-insensitive-tab-completion-in-bash)
+Take a look in your `.bash_profile`; you should already have this line, which allows your to do case-insensitive tab auto-completion:
+
+```bash
+# Case-Insensitive Auto Completion
+  bind "set completion-ignore-case on" 
+```
 
 # Git Updates
 
@@ -348,6 +353,16 @@ These items below are **optional**, but are definitely worth looking through. We
 
 It's important that you have proper syntax highlighting and a readable light and dark theme for Terminal and your text editor. At Flatiron, we <3 [Solarized](http://ethanschoonover.com/solarized). After all, it's a mathematically proven theme. There are other themes, but let's stay consistent and all use Solarized, it's so pretty. You can grab the [Flatiron Solarized](http://flatironschool.s3.amazonaws.com/curriculum/resources/environment/themes/Solarized%20Flatiron.zip).
 
+#### To Add to Sublime Text
+
+Sublime Text 2 > Preferences > Color Scheme
+
+#### To Add to Terminal
+
+Terminal > Preferences > Settings
+
+From here, on the left-hand panel at the bottom, click on the sun icon, which gives a drop down. Click Import and select the Flatiron Solarized file you just downloaded.
+
 ![Solarized](https://github.com/altercation/solarized/raw/master/img/solarized-palette.png)
 
 ![Solarized](https://github.com/altercation/solarized/raw/master/img/solarized-vim.png)
@@ -367,6 +382,10 @@ Or if you're using this version:
 ## Supporting Software
 
 There are a bunch of tools that we find invaluable as a developer.
+
+### Protect your Eyes!
+
+We love [f.lux](https://justgetflux.com/)! f.lux adjusts your screen's brightness depending on the lighting and the time of day / sun level in the sky, for ease on your eyes and to help you sleep. Play around with the settings. It's subtle, but makes a **huge** difference, especially if you're working late on your computer.
 
 ### A Launcher
 
