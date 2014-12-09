@@ -5,35 +5,11 @@ languages: ruby, bash
 
 #Environment Setup
 
-It's important to get your system setup and working well. There are a ton of different ways to customize your system, but to keep things simple, and to make it easy for others to work with you, we're going to set our computers up in a similar way. **Go through these instructions and be sure to read everything!**
+You should have already done a bunch of things to set up your environment in the [prework](http://learn.flatironschool.com/lessons/1171), including: installing Yosemite, XCode/Command Line Tools, Homebrew, Git, RVM, Ironboard gem, and Sublime Text 3.
 
-# OSX Version
+Now we're going to add a much of other little things to make your development environment even better and customizable.
 
-Make sure you are using OSX 10.9 Mavericks. To check, click on the  in the menu bar and select "About This Mac" The version should be 10.9.5 or greater. If your version of OSX is below 10.9.5, update your Mac through the Mac App Store. 
-
-# GCC
-
-Most OS level programs are written in C or C++. These programs must be compiled and interpreted by a C-level compiler. The most common compiler for POSIX systems is GCC, or the GNU Compiler Collection. On OS 10.8 and below (anything before Mavericks), GCC is part of the command line tools.
-
-If you are using using OS 10.9 (Mavericks) or above, you need to download the most recent version of Command Line Tools from Apple's [developer website](https://developer.apple.com/opensource/), or if you don't have an Apple developer account, you can download the command line tools [here](https://s3-us-west-2.amazonaws.com/command-line-tools/command_line_tools_install.dmg).
-
-If you have an OSX version earlier than 10.9, you should upgrade to at least 10.9 (Mavericks). You should be able to go to the App Store on your computer, search for Mavericks, and install it from there.
-
-Once GCC is installed correctly, you should be able to type `gcc` into terminal and see output like:
-
-```
-clang: error: no input files
-```
-
-If you see output like:
-
-```
--bash: gcc: command not found
-```
-
-Then it means that the command line tools are not set up correctly. Flag one of the TAs down if you're unable to set it up.
-
-# Bash Profile
+## Bash Profile
 
 As you've been learning, your bash_profile is a script that runs every time you open or login to your shell. It can configure environment variables, like your `PS1`, which stores your prompt, or `EDITOR`, which is the command other programs will use when they need to launch your default editor.
 
@@ -47,7 +23,7 @@ Within that Bash Profile are comments that explain each part. **Make sure to rea
 
 Just remember, to activate a change in the dotfile, you must **reload your shell**. You can do that via opening a new tab or typing `source .bash_profile` (from the `~` directory).
 
-# Directory Setup
+## Directory Setup
 
 In order to have an efficient workflow in programming, it's important to have a directory setup that is conducive to navigating multiple directories quickly. Here's how Avi likes to setup directories for development. Some general rules he follows:
 
@@ -85,34 +61,7 @@ function lg {
 }
 ```
 
-# Homebrew
-
-Once GCC is installed the next step is to install [Homebrew](http://brew.sh/). Homebrew will be our package manager, the system we use to install OS / Command Line level applications.
-
-After, make sure to run `brew doctor` and try to resolve as many of the conflicts as possible.
-
-Try `brew search postgres` and you'll find the postgres package (don't install it, we'll do that later.)
-
-## Reinstalling Homebrew
-
-Should you need this works:
-
-```
-\curl -L https://gist.github.com/mxcl/1173223/raw/a833ba44e7be8428d877e58640720ff43c59dbad/uninstall_homebrew.sh | bash
-```
-### Totally Ok brew doctor warnings
-
-There are a couple of pretty benign brew doctor methods.
-
-#### Warning: You have unlinked kegs in your Cellar
-
-This is generally fine. If you want to fix them, just do brew link UNLINKEDKEGNAMES --force
-
-#### Warning: Some keg-only formula are linked into the Cellar.
-
-Totally fine, don't even stress this one.
-
-# Git & SQLite3 Updates via Brew
+## Git & SQLite3 Updates via Brew
 
 OS X might ship with an old and broken version of git. We want to update it. Try `git version`. Then do `brew install git`. Open a new terminal tab and do `git version` to see if the version was bumped. If it wasn't, try `which git` to see where your command is running from (most likely is `/usr/bin`). The proper way around this is figuring out why `/usr/bin` is appearing first in your `PATH`. Sometimes `brew link git` helps fix that. If not a quick hack is to:
 
@@ -124,60 +73,27 @@ That effectively will rename git in `/usr/bin` to a `git.bak` thereby preventing
 
 The exact same instructions apply to sqlite3. For sqlite3 though you must also do `brew link sqlite3 --force` to create the symlink.
 
-# RVM
-
-Next comes setting up our ruby version manager. OS X ships with an old version of ruby and we want to seamlessly be able to move between versions. First, watch this short [screencast on RVM - 8 minutes](http://screencasts.org/episodes/how-to-use-rvm), read about it on [RVM](http://rvm.io) and then install rvm with:
-
-```
-\curl -L https://get.rvm.io | bash -s stable --ruby=2.1.2
-```
-
-That will install the latest stable version of RVM along with the latest stable version of ruby 2.1.2. Then type `rvm use 2.1.2 --default` to make that your default ruby. Open a new tab and try ruby -v and see if it matches the installed version of ruby. You can install another version of ruby with `rvm install 2.1.1` and see all installable rubies with `rvm list known`
-
-## Troubleshooting RVM
-
-There are two main sources of problems with RVM. Most occur during the installing of Ruby portion. You might get errors regarding XCode or GCC and that generally means you need to [uninstall XCode - read the entire guide, follow all instructions](http://osxdaily.com/2012/02/20/uninstall-xcode/) and then restart your computer. Reinstall an up to date version of Xcode or the command line tools if you are on Mavericks and then try to install ruby again.
-
-Other issues have to do with broken homebrew installations. Try reinstalling homebrew with:
-
-```
-\curl -L https://gist.github.com/mxcl/1173223/raw/a833ba44e7be8428d877e58640720ff43c59dbad/uninstall_homebrew.sh | bash
-```
-
-If ruby installed correctly but `ruby -v` still outputs the 1.8.7 OSX version, do `which ruby` (after opening a new tab and trying again) to confirm it is being run out of `/usr/bin/ruby`. If so, there is a `PATH` issue which should be fixed, but you can also do this hack:
-
-```
-sudo mv /usr/bin/ruby /usr/bin/ruby.bak
-sudo mv /usr/bin/gem /usr/bin/gem.bak
-```
-
-### Uninstalling RVM Because of Sys Wide Installs
-
-Another issue is sometimes rvm gets installed in /usr/local/rvm, a system wide install. If so, you have to rvm implode to uninstall rvm, clear out your .bashrc file or remove any reference to RVM in there, `sudo rm /etc/profile.d/rvm.sh`.  You'll also want to remove the reference to that file you just deleted in the `/etc/profile`. Also `sudo rm /etc/rvmrc`. And then restart your computer and reinstall rvm. Make sure it is installing into `/Users/yourusername/.rvm` and not `/usr/local` A system wide install in /usr/local/rvm, never install rvm with sudo (and avoiding the use of sudo in general).
-Finally ensure that 2.1.2 is the default ruby with `rvm use 2.1.2 --default`
-
-# Sublime Text
+## Sublime Text
 
 We spend most of our time in a text editor. Make sure you have a good one. We use [Sublime Text](http://www.sublimetext.com). Sublime Text 2 and 3 are basically the same, so it's up to you which one you want. Once you have that installed, follow the instructions below.
 
-
-## Setting up the subl symlink
+### Setting up the subl symlink
 
 The first task is to make a symlink to subl. This will allow you to type `subl` in your terminal to launch Sublime Text. Assuming you've placed Sublime Text in the Applications folder, and that you have a `/usr/local/bin` directory in your path, you can run:
 
-### For Sublime Text 2
+#### For Sublime Text 2
 ```
 ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" usr/local/bin
 ```
 
-### For Sublime Text 3
+#### For Sublime Text 3
 ```
 ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" usr/local/bin
 ```
 
-## Install Package Control
+### Install Package Control
 
-Go to [this link](https://sublime.wbond.net/installation).
+If you haven't installed Packages Control, go to [this link](https://sublime.wbond.net/installation).
 
 Sublime Text's functionality can be greatly expanded via plugins called "packages." We won't get into any specific ones to install here, but in order to install them later on down the road, we need to install what is known as Package Control.
 
@@ -189,13 +105,13 @@ ctrl+`
 
 Or, click `View > Show Console`. This will open the Sublime Text console. Then, visit [this link](https://sublime.wbond.net/installation#st2), and copy and paste the code under the Sublime Text 2 tab into the Sublime Text console. Press `enter` and Package Control will be installed.
 
-## Resources
+### Resources
 - [RVM, RSpec and Sublime Text 2](http://rubenlaguna.com/wp/2012/12/07/sublime-text-2-rvm-rspec-take-2/)
 - [Shortcuts with PDF](http://maxoffsky.com/code-blog/sublime-text-2-shortcuts-printable-format-and-a-gist/)
 
-# Check Up
+## Check Up
 
-## gcc
+### gcc
 
 Typing `gcc` should give you something like:
 
@@ -205,11 +121,11 @@ clang: error: no input files
 
 Not command not found.
 
-## brew
+### brew
 
 `brew doctor` should reveal no errors. If it tells you that you have macports installed, uninstall it. Other warnings are generally benign at this point.
 
-## terminal
+### terminal
 
 Make sure when you open a new terminal your output looks something like:
 
@@ -221,23 +137,23 @@ Last login: Tue Jun  4 22:43:49 on ttys006
 
 If you see some `bash - command not found` type output, it's not a big deal, but let a TA know.
 
-## ruby
+### ruby
 
 `ruby -v` should give you a modern, rvm based ruby, like 2.1.2. `which ruby` should point to an rvm path. Opening a new terminal should maintain ruby versions, if not try `rvm use 2.1.2 --default`
 
-## rvm
+### rvm
 
 `rvm list` should show you installed ruby versions, like 2.1.2.
 
-## sqlite3
+### sqlite3
 
 `sqlite3 --version` should be >= the 3.7.12 series. If not, do `brew install sqlite3` and `brew link sqlite3 --force` and open a new terminal to retest.
 
-## git
+### git
 
 `git --version` should be above 1.8.5. `which git` should point to `/usr/local/bin/git`. If not `brew install git` and `brew link git --force`, new terminal, retest.
 
-## rubygems
+### rubygems
 
 `gem env` should output consistent information about your gem env, pointing to similar RVM based paths. Like:
 
@@ -266,9 +182,9 @@ RubyGems Environment:
 
 Notice how all the ruby versions correspond in both number and paths?
 
-# BASH Extras
+## BASH Extras
 
-## Case-Insensitive Auto-Completion
+### Case-Insensitive Auto-Completion
 
 Take a look in your `.bash_profile`; you should already have this line, which allows your to do case-insensitive tab auto-completion:
 
@@ -277,9 +193,9 @@ Take a look in your `.bash_profile`; you should already have this line, which al
   bind "set completion-ignore-case on" 
 ```
 
-# Git Updates
+## Git Updates
 
-## git branch autocompletion
+### git branch autocompletion
 
 Autocompletion (pressing tab to autocomplete the name of something) is amazing. You can autocomplete your git branch names through homebrew very easily. Just run:
 
@@ -295,7 +211,7 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
 fi
 ```
 
-## .gitconfig
+### .gitconfig
 
 Grab the [Flatiron GitConfig](https://github.com/flatiron-school/dotfiles/blob/master/gitconfig) and create it as `.gitconfig` in your `~`. Also, don't forget to replace the values in some of the person variables like `excludesfile = /Users/<YOUR HOME DIRECTORY>/.gitignore` and:
 
@@ -308,16 +224,16 @@ Pay attention to the cool aliases setup in the git config, like git co for git c
   email = <github email address>
 ```
 
-## .gitignore
+### .gitignore
 
 Read [Github GitIgnore Guide](https://help.github.com/articles/ignoring-files), so you understand what a global gitignore will do and then grab the [Flatiron GitIgnore](https://github.com/flatiron-school/dotfiles/blob/master/gitignore) and create it in `~` as `.gitignore`.
 
-## .gemrc
+### .gemrc
 
 `gem: --no-ri --no-rdoc`
 This will omit installing the rdoc documentation and speed up gem installs.
 
-## .irbrc
+### .irbrc
 
 ```ruby
 class Object
@@ -335,107 +251,8 @@ end
 ```
 This will allow you to see what methods an object you're working with has but excluding the stuff that exists on all ruby objects.
 
-##base/sqlitebrowser/navicat
+### base/sqlitebrowser/navicat
 
 Base is an OS X GUI for browsing SQL databases but is not free.
 SQLitebrowser is a GUI that only works for SQLITE.
 Navicat is a free GUI that works for multiple database types (SQLITE, MYSQL, POSTGRES)
-
-# Other Items of Interest
-
-These items below are **optional**, but are definitely worth looking through. We utilize most of these in our day-to-day workflows.
-
-## Themes
-
-### Solarized
-
-![Solarized](https://github.com/altercation/solarized/raw/master/img/solarized-yinyang.png)
-
-It's important that you have proper syntax highlighting and a readable light and dark theme for Terminal and your text editor. At Flatiron, we <3 [Solarized](http://ethanschoonover.com/solarized). After all, it's a mathematically proven theme. There are other themes, but let's stay consistent and all use Solarized, it's so pretty. You can grab the [Flatiron Solarized](http://flatironschool.s3.amazonaws.com/curriculum/resources/environment/themes/Solarized%20Flatiron.zip).
-
-#### To Add to Sublime Text
-
-Sublime Text 2 > Preferences > Color Scheme
-
-#### To Add to Terminal
-
-Terminal > Preferences > Settings
-
-From here, on the left-hand panel at the bottom, click on the sun icon, which gives a drop down. Click Import and select the Flatiron Solarized file you just downloaded.
-
-![Solarized](https://github.com/altercation/solarized/raw/master/img/solarized-palette.png)
-
-![Solarized](https://github.com/altercation/solarized/raw/master/img/solarized-vim.png)
-
-### How to Install a Sublime Theme
-
-**Sublime Text 2**
-
-Just put it in here:
-`~/Library/Application\ Support/Sublime\ Text\ 2/Packages/Color\ Scheme\ -\ Default`
-
-**Sublime Text 3**
-
-Or if you're using this version:
-`~/Library/Application\ Support/Sublime\ Text\ 3/Packages/Color\ Scheme\ -\ Default/`
-
-## Supporting Software
-
-There are a bunch of tools that we find invaluable as a developer.
-
-### Protect your Eyes!
-
-We love [f.lux](https://justgetflux.com/)! f.lux adjusts your screen's brightness depending on the lighting and the time of day / sun level in the sky, for ease on your eyes and to help you sleep. Play around with the settings. It's subtle, but makes a **huge** difference, especially if you're working late on your computer.
-
-### A Launcher
-
-You should have a quick launcher so that you can run applications and arbitrary commands through a keyboard shortcut.
-
-[Alfred 2](http://www.alfredapp.com/) - This is my favorite, but it costs money to unlock the very required power features. But I use this around 92 times a day. Plus it comes with a clipboard history. There are lots of power user guides for all this software.
-
-[Quicksilver](http://qsapp.com/) - tried and true and free and awesome. but so old.
-
-[Launchbar](http://www.obdev.at/products/launchbar/index.html) - People love it, I've never used it, and I think it costs money.
-
-**There are lots of power user guides for all this software.**
-
-### Clipboard History
-
-If you do not have a clipboard history enabled...well, I mean, that's just crazy. The one in Alfred is awesome. Others include:
-
-[Collective](http://www.generation-loss.com/) - Looks awesome, super cheap ($2), have never used it.
-
-[Jumpcut](http://jumpcut.sourceforge.net/) - Free but old.
-
-[ClipMenu](http://www.clipmenu.com/) - Free.
-
-
-### Documentation
-
-[Dash](http://kapeli.com/dash) - A comprehensive documentation browser. It's awesome, will save you hours in googling. Costs money, but worth it.
-
-### Git Visualizers
-
-[Github OS X](http://mac.github.com/) - Worth having, but honestly, I've never used it.
-
-[SourceTree](http://www.sourcetreeapp.com/) - Super heavy git gui that's free and pretty good.
-
-[GitX (L)](http://gitx.laullon.com/) - A well maintained fork of GitX
-
-### Window Management
-
-[Breeze](http://www.autumnapps.com/breeze/) - My favorite.
-
-## Programming Fonts
-
-You're going to be spending a ton of time staring at your screen. The default fonts
-you have installed probably aren't the most readable. Here are some nice ones you
-may want to consider installing:
-
-- [Flatiron Collection of Fonts](http://flatiron-school.s3.amazonaws.com/resources/programming%20fonts.zip)
-- [Dan Benjamin's Top 10 Programming Fonts](http://hivelogic.com/articles/top-10-programming-fonts/)
-- [Dan Benjamin on Anonymous Pro](http://hivelogic.com/articles/anonymous-pro-programming-monospace-font)
-- [Jeff Atwood on Programming Fonts](http://www.codinghorror.com/blog/2007/10/revisiting-programming-fonts.html)
-- [More Fonts!](http://www.openwatcom.org/index.php/Programmers_Fonts)
-- [Even More Fonts!](http://www.proggyfonts.com/)
-- [Managing Fonts in OS X](http://support.apple.com/kb/ht2435)
