@@ -83,12 +83,12 @@ The first task is to make a symlink to subl. This will allow you to type `subl` 
 
 #### For Sublime Text 2
 ```
-ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" usr/local/bin
+ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" /usr/local/bin
 ```
 
 #### For Sublime Text 3
 ```
-ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" usr/local/bin
+ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin
 ```
 
 ### Install Package Control
