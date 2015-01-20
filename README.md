@@ -139,11 +139,11 @@ If you see some `bash - command not found` type output, it's not a big deal, but
 
 ### ruby
 
-`ruby -v` should give you a modern, rvm based ruby, like 2.1.2. `which ruby` should point to an rvm path. Opening a new terminal should maintain ruby versions, if not try `rvm use 2.1.2 --default`
+`ruby -v` should give you a modern, rvm based ruby, like 2.2.0. `which ruby` should point to an rvm path. Opening a new terminal should maintain ruby versions, if not try `rvm use 2.2.0 --default`
 
 ### rvm
 
-`rvm list` should show you installed ruby versions, like 2.1.2.
+`rvm list` should show you installed ruby versions, like 2.2.0.
 
 ### sqlite3
 
