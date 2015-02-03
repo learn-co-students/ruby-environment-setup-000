@@ -182,6 +182,10 @@ RubyGems Environment:
 
 Notice how all the ruby versions correspond in both number and paths?
 
+### Ironboard Gem
+
+If you have not already installed the ironboard gem, run `gem install ironboard`. If you get an error saying the gem could not be found, run `gem sources -a http://flatiron:33west26@gems.flatironschool.com` and then try `gem install ironboard` again.
+
 ## BASH Extras
 
 ### Case-Insensitive Auto-Completion
